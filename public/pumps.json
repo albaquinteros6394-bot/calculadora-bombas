@@ -3,52 +3,108 @@
     "id": "pompa-1",
     "marca": "MarcaA",
     "modelo": "PA-100",
+    "descripcion": "Bomba centrífuga horizontal, 75 HP, para agua limpia",
+    "potencia_nominal": 75,
+    "rpm": 1750,
     "curva": [
-      {
-        "Q": 0,
-        "H": 120
-      },
-      {
-        "Q": 50,
-        "H": 110
-      },
-      {
-        "Q": 100,
-        "H": 80
-      }
+      { "Q": 0, "H": 120 },
+      { "Q": 20, "H": 118 },
+      { "Q": 40, "H": 115 },
+      { "Q": 50, "H": 110 },
+      { "Q": 60, "H": 105 },
+      { "Q": 80, "H": 95 },
+      { "Q": 100, "H": 80 }
     ],
-    "efficiency": [
-      {
-        "Q": 50,
-        "eta": 0.75
-      }
+    "eficiencia": [
+      { "Q": 0, "eta": 0 },
+      { "Q": 20, "eta": 0.65 },
+      { "Q": 40, "eta": 0.73 },
+      { "Q": 50, "eta": 0.75 },
+      { "Q": 60, "eta": 0.74 },
+      { "Q": 80, "eta": 0.70 },
+      { "Q": 100, "eta": 0.60 }
     ],
-    "NPSHr": 3.5
+    "NPSHr": 3.5,
+    "precio_estimado": 12500
   },
   {
     "id": "pompa-2",
     "marca": "MarcaB",
     "modelo": "PB-50",
+    "descripcion": "Bomba sumergible para pozo profundo, 50 HP",
+    "potencia_nominal": 50,
+    "rpm": 3500,
     "curva": [
-      {
-        "Q": 0,
-        "H": 90
-      },
-      {
-        "Q": 30,
-        "H": 85
-      },
-      {
-        "Q": 60,
-        "H": 70
-      }
+      { "Q": 0, "H": 90 },
+      { "Q": 10, "H": 88 },
+      { "Q": 20, "H": 86 },
+      { "Q": 30, "H": 85 },
+      { "Q": 40, "H": 82 },
+      { "Q": 50, "H": 78 },
+      { "Q": 60, "H": 70 }
     ],
-    "efficiency": [
-      {
-        "Q": 30,
-        "eta": 0.72
-      }
+    "eficiencia": [
+      { "Q": 0, "eta": 0 },
+      { "Q": 10, "eta": 0.60 },
+      { "Q": 20, "eta": 0.68 },
+      { "Q": 30, "eta": 0.72 },
+      { "Q": 40, "eta": 0.70 },
+      { "Q": 50, "eta": 0.65 },
+      { "Q": 60, "eta": 0.55 }
     ],
-    "NPSHr": 2.8
+    "NPSHr": 2.8,
+    "precio_estimado": 8500
+  },
+  {
+    "id": "pompa-3",
+    "marca": "MarcaC",
+    "modelo": "PC-150",
+    "descripcion": "Bomba de alta presión para riego, 150 HP",
+    "potencia_nominal": 150,
+    "rpm": 1750,
+    "curva": [
+      { "Q": 0, "H": 180 },
+      { "Q": 30, "H": 175 },
+      { "Q": 60, "H": 165 },
+      { "Q": 90, "H": 150 },
+      { "Q": 120, "H": 130 },
+      { "Q": 150, "H": 100 }
+    ],
+    "eficiencia": [
+      { "Q": 0, "eta": 0 },
+      { "Q": 30, "eta": 0.68 },
+      { "Q": 60, "eta": 0.76 },
+      { "Q": 90, "eta": 0.78 },
+      { "Q": 120, "eta": 0.75 },
+      { "Q": 150, "eta": 0.65 }
+    ],
+    "NPSHr": 5.2,
+    "precio_estimado": 22000
+  },
+  {
+    "id": "pompa-4",
+    "marca": "MarcaD",
+    "modelo": "PD-25",
+    "descripcion": "Bomba autocebante para construcción, 25 HP",
+    "potencia_nominal": 25,
+    "rpm": 2900,
+    "curva": [
+      { "Q": 0, "H": 60 },
+      { "Q": 10, "H": 58 },
+      { "Q": 20, "H": 55 },
+      { "Q": 30, "H": 50 },
+      { "Q": 40, "H": 42 },
+      { "Q": 50, "H": 30 }
+    ],
+    "eficiencia": [
+      { "Q": 0, "eta": 0 },
+      { "Q": 10, "eta": 0.55 },
+      { "Q": 20, "eta": 0.65 },
+      { "Q": 30, "eta": 0.68 },
+      { "Q": 40, "eta": 0.62 },
+      { "Q": 50, "eta": 0.50 }
+    ],
+    "NPSHr": 2.0,
+    "precio_estimado": 4500
   }
 ]
