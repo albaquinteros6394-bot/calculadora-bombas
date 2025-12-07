@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import InputForm from '../../components/InputForm';
 import ResultsCard from '../../components/ResultsCard';
 import dynamic from 'next/dynamic';
+import ReporteAnalisis from '../../components/ReporteAnalisis';
 
 // Importar HQChart dinámicamente para evitar errores de SSR
 const HQChart = dynamic(
@@ -434,6 +435,15 @@ export default function Calculadora() {
           </div>
         </div>
       </div>
+         {/* Reporte y Análisis Detallado */}
+      <ReporteAnalisis
+        modo={mode}
+        caudal={Q}
+        alturaManual={mode === 'basico' ? basicHeight : undefined}
+        bombaSeleccionada={pumps.find(p => p.id === selectedPumpId)}
+        tramos={stations}
+        resultados={resultados}
+      />
     </div>
   );
 }
