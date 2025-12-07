@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+.next/
+*.log
+.env.local
+.DS_Store
+
+# Build outputs
+dist/
+out/
+build/
+.vercel/
+
+# OS files
+Thumbs.db
+
+# Large files
+*.node
