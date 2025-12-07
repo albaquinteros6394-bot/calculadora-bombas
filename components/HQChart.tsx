@@ -1,39 +1,58 @@
 'use client';
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { useState, useEffect } from 'react';
 
-export default function HQChart({ Q, Hreq, pump }:{Q:number, Hreq:number, pump:any}) {
-  const points:any[] = [];
-  const Qmax = Math.max((pump?.curva?.slice(-1)[0]?.Q || Q*2), Math.max(Q*1.5, 100));
-  for(let q=0; q<=Qmax; q+=Qmax/30){
-    const Hsystem = Q===0?0: Hreq * (q / Math.max(Q,1));
-    const Hpump = pump?.curva ? interpolatePumpH(pump.curva, q) : Math.max(0, 100 - 0.01*q*q);
-    points.push({ q: Math.round(q), Hpump: Number(Hpump.toFixed(2)), Hsystem: Number(Hsystem.toFixed(2)) });
+export default function HQChart({ 
+  selectedPump, 
+  currentQ, 
+  currentH,
+  requiredPumps = 1 
+}: { 
+  selectedPump: any; 
+  currentQ: number; 
+  currentH: number;
+  requiredPumps?: number;
+}) {
+  const [isClient, setIsClient] = useState(false);
+  
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  
+  if (!isClient) {
+    return <div className="p-4 bg-gray-100 rounded animate-pulse h-64 flex items-center justify-center">Cargando gráfico...</div>;
   }
+  
+  if (!selectedPump || !selectedPump.curva) {
+    return <div className="p-4 border rounded bg-yellow-50">Selecciona una bomba para ver la curva</div>;
+  }
+  
   return (
-    <div style={{ height: 320 }}>
-      <ResponsiveContainer>
-        <LineChart data={points}>
-          <XAxis dataKey="q" name="Q (L/s)" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="Hpump" stroke="#8884d8" dot={false} />
-          <Line type="monotone" dataKey="Hsystem" stroke="#82ca9d" dot={false} />
-        </LineChart>
-      </ResponsiveContainer>
+    <div className="space-y-4">
+      <div className="border rounded-lg p-4 bg-white">
+        <h3 className="font-semibold mb-2">Curva de la bomba: {selectedPump.marca} {selectedPump.modelo}</h3>
+        <div className="space-y-2">
+          <div className="flex justify-between">
+            <span className="text-gray-600">Caudal actual:</span>
+            <span className="font-medium">{currentQ} L/s</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-600">Altura requerida:</span>
+            <span className="font-medium">{currentH} m</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-600">Puntos de la curva:</span>
+            <span className="font-medium">{selectedPump.curva.length} puntos</span>
+          </div>
+        </div>
+        <div className="mt-4 p-3 bg-blue-50 rounded">
+          <p className="text-sm text-blue-700">
+            Gráfico simplificado - En una versión completa aquí iría un gráfico interactivo usando Chart.js o similar.
+          </p>
+        </div>
+      </div>
+      <div className="text-sm text-gray-500">
+        <p>Para ver un gráfico completo, se necesitaría instalar una librería de gráficos como Chart.js o Recharts.</p>
+      </div>
     </div>
   );
-}
-
-function interpolatePumpH(curve:any[], q:number){
-  if(q<=curve[0].Q) return curve[0].H;
-  for(let i=0;i<curve.length-1;i++){
-    const a=curve[i], b=curve[i+1];
-    if(q>=a.Q && q<=b.Q){
-      const t=(q-a.Q)/(b.Q-a.Q);
-      return a.H + t*(b.H-a.H);
-    }
-  }
-  const last = curve[curve.length-1];
-  return Math.max(0, last.H - 0.005*(q-last.Q)*(q-last.Q));
 }
